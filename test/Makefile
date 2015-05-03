@@ -97,3 +97,9 @@ string_unittest:string_unittest.o gtest_main.a
 string_unittest.o:$(TEST_DIR)/string_unittest.cc $(USER_DIR)/vstd/String.hpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -c $(TEST_DIR)/string_unittest.cc
 
+deque_unittest:deque_unittest.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -lpthread $^ -o $@ 
+
+deque_unittest.o:$(TEST_DIR)/deque_unittest.cc $(USER_DIR)/vstd/deque.hpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -c $(TEST_DIR)/deque_unittest.cc
+
