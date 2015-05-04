@@ -192,7 +192,7 @@ TEST(CONSTRUCTORS, DEFAULT){
 
 TEST(MODIFY, PUSH_BACK){
     deque<int> dq;
-    const int loop = 30;
+    const int loop = 100000;
 
     for (int i = 0; i < loop; ++i){
         dq.push_back(i);

@@ -8,10 +8,13 @@ using std::endl;
 int main(){
     using verihy::vstd::deque;
     deque<int> dq;
-    for(int i = 0; i< 10000; ++i){
+    for(int i = 0; i< 30; ++i){
         dq.push_back(i);
     }
-    dq[2];
+    for(int i = 0; i< 30; ++i){
+        dq[i];
+    }
+    //dq[2];
     //for(int i = 0; i< 100; ++i){
         //cout << a[i] << endl;
     //}

@@ -106,8 +106,7 @@ class deque{
 
         static const std::size_t space = 24;
 
-        map(): data(new pointer[2 * space]), end(data + 2 * space), first(data + space),
-                last(first){
+        map(): data(new pointer[2 * space]), end(data + 2 * space), first(data + space), last(first){
                     std::fill(data, data + 2 * space, nullptr); 
                 };
         ~map(){
@@ -119,10 +118,12 @@ class deque{
 
         T& get_value(std::size_t pos){
             std::size_t fsz = (*first)->tail - (*first)->first;
-            if (pos <= fsz){
-                return (*first[0])[pos];
+            block *blk = first[0];
+            if (pos >= fsz){
+                pos -= fsz;
+                blk = first[1 + pos / block::default_size];
             }
-            return (*first[(pos - fsz) / block::default_size + 1])[(pos - fsz) % block::default_size];
+            return (*blk)[pos % block::default_size];
         }
 
         void grow(){
@@ -146,13 +147,9 @@ class deque{
         }
 
         pointer push_back(){
-            std::cout << "=== MAP PUSH_BACK ===" << std::endl; 
             if (last + 1 >= end){
                 grow();
             }
-            //if (nullptr == *(++last)){
-                //*last = new block();
-            //}
             return *(++last);
         }
 
@@ -160,9 +157,6 @@ class deque{
             if (first <= data){
                 grow();
             }
-            //if (nullptr == *(--first)){
-                //*first = new block(true);
-            //}
             return *(--first);
         }
 
@@ -185,7 +179,7 @@ class deque{
             if ( (*last)->push_back(rhs)){
                 return;
             }
-            push_back();
+            this->push_back();
             //if (!*last){
                 //*last = new block();
             //}
