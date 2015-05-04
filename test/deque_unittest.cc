@@ -192,11 +192,12 @@ TEST(CONSTRUCTORS, DEFAULT){
 
 TEST(MODIFY, PUSH_BACK){
     deque<int> dq;
+    const int loop = 30;
 
-    for (int i = 0; i < 10000; ++i){
+    for (int i = 0; i < loop; ++i){
         dq.push_back(i);
     }
-    for (int i = 0; i < 10000; ++i){
+    for (int i = 0; i < loop; ++i){
         ASSERT_EQ(i, dq[i]);
     }
 }

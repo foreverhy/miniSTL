@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include <iostream>
+
 namespace verihy{
 
 namespace vstd{
@@ -118,12 +120,13 @@ class deque{
         T& get_value(std::size_t pos){
             std::size_t fsz = (*first)->tail - (*first)->first;
             if (pos <= fsz){
-                return first[0][pos];
+                return (*first[0])[pos];
             }
-            return first[(pos - fsz) / block::default_size + 1][(pos - fsz) % block::default_size];
+            return (*first[(pos - fsz) / block::default_size + 1])[(pos - fsz) % block::default_size];
         }
 
         void grow(){
+            std::cout << "=== MAP GROW ===" << std::endl; 
             int sz = last - first + 1;
             auto data_new = new pointer[space * 2 + sz];
             for (auto p1 = data_new + space, p2 = first; p2 <= last; ++p1, ++p2){
@@ -143,6 +146,7 @@ class deque{
         }
 
         pointer push_back(){
+            std::cout << "=== MAP PUSH_BACK ===" << std::endl; 
             if (last + 1 >= end){
                 grow();
             }
