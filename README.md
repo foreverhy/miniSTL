@@ -9,3 +9,7 @@ vstd
 Algorithm
 ---------
  + next\_permutation
+
+Working
+-------
+ + deque
